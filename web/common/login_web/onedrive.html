@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OneDrive跳转页</title>
+</head>
+<body style="display:none;">
+请<a id="action" target="_blank">点我</a>并在新窗口完成授权验证
+</body>
+<script>
+    (function (){
+        const path = location.origin+location.pathname;
+        const sz = path.split("/");
+        sz.length -= 3;
+        const host = sz.join("/");
+        let ajaxHostUrl = host+"/webos/api";
+        var utils = {
+            uuid:function(){
+                function S4() {
+                    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+                }
+                return S4() + S4() + S4() + S4() + S4() + S4() + S4() + S4();
+            },
+            getAbsoluteUrl:function(module, action){
+                return ajaxHostUrl+"?module=" + module + "&action=" + action;
+            }
+        }
+        var key = "code"+utils.uuid();
+        var url = utils.getAbsoluteUrl("fileSystem","setTmpCache")+"&key="+key;
+        var loginUrl = "//plugins.webos.tenfell.cn/webos_update/common/onedrivelogin.html?curl="+encodeURIComponent(url);
+        document.getElementById("action").href = loginUrl;
+        document.body.style.display = "";
+        var getCodeFunc = function (){
+            var gurl = utils.getAbsoluteUrl("fileSystem","getTmpCache")+"&key="+key;
+            fetch(gurl).then(function (res){return res.json()}).then(function (res){
+                if(res.code == 0){
+                    parent.postMessage({type:"cookie",data:res.data},"*");
+                }else{
+                    setTimeout(getCodeFunc,1000);
+                }
+            }).catch(function (){
+                setTimeout(getCodeFunc,1000);
+            });
+        }
+        getCodeFunc();
+    })()
+</script>
+</html>

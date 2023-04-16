@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>夸克网盘</title>
+    <script src="../smart-ui/boot/utils.js?from=element"></script>
+    <style>
+    </style>
+</head>
+<body>
+<div style="text-align: center;margin-top: 10px;">请使用夸克APP扫码登录</div>
+<div id="qrcode-div" style="padding-left: calc(50vw - 128px);padding-top: 10px;"></div>
+</body>
+<script>
+    (async function (){
+        var tmpUtil = {
+            getCookieStr:function (xhr,name){
+                var tmp = xhr.getResponseHeader(name);
+                var cookies = tmp.split(";");
+                //var fields = ["_UP_28A_52_","_UP_BT_","_UP_F7E_8D_","_UP_6D1_64_","_UP_A4A_11_","_UP_D_","b-user-id","b-user-id.sig","omelette-vid","omelette-vid.sig"];
+                var fields = ["__uid=","__ktd=","__kps=","__kp=","__pus=","__ptu_fix=","__ptu=","ctoken="];
+                var str = "";
+                for (let i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i];
+                    var field = null;
+                    for (let j = 0; j < fields.length; j++) {
+                        if(cookie.indexOf(fields[j]) != -1){
+                            field = fields[j];
+                            break;
+                        }
+                    }
+                    if(!field){
+                        continue;
+                    }
+                    var sz = cookie.split(",");
+                    for (let j = 0; j < sz.length; j++) {
+                        if(sz[j].indexOf(field) != -1){
+                            cookie = sz[j].trim();
+                            break;
+                        }
+                    }
+                    str += ";"+cookie;
+                }
+                return str.substring(1);
+            }
+        }
+        var data = new parent.FormData();
+        data.append("client_id","386");
+        data.append("v","1.2");
+        data.append("request_id",""+Date.now());
+        var xhr = await parent.webos.request.proxy(
+            "https://uop.quark.cn/cas/ajax/getTokenForQrcodeLogin?__t="+Date.now(),
+            "POST",
+            {
+                "referer":"https://broccoli.uc.cn/",
+                "content-type":"application/x-www-form-urlencoded",
+            "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.63"},
+            data
+        );
+        if(xhr.status != 200){
+            parent.webos.message.error("获取请求失败,请重试");
+            return;
+        }
+        var res = JSON.parse(xhr.responseText);
+        if(res.status != 2000000){
+            parent.webos.message.error("获取请求失败,请重试");
+            return;
+        }
+        var token = res.data.members.token;
+        var qrcode = "https://t.uc.cn/8_au5on?uc_param_str=&token="+token+"&client_id=386&uc_biz_str=S%3Acustom%7COPT%3ASAREA%400%7COPT%3AIMMERSIVE%401%7COPT%3ABACK_BTN_STYLE%400";
+        parent.webos.util.toQrcode(qrcode,document.getElementById("qrcode-div"));
+        const timeId = setInterval(async function (){
+            data = new parent.FormData();
+            data.append("client_id","386");
+            data.append("v","1.2");
+            data.append("request_id",""+Date.now());
+            data.append("token",token);
+            var xhr2 = await parent.webos.request.proxy(
+                "https://uop.quark.cn/cas/ajax/getServiceTicketByQrcodeToken?__t="+Date.now(),
+                "POST",
+                {
+                    "referer":"https://broccoli.uc.cn/",
+                    "content-type":"application/x-www-form-urlencoded",
+                    "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.63"},
+                data
+            );
+            try{
+                var res = JSON.parse(xhr2.responseText);
+                if(res.status == 2000000){
+                    clearInterval(timeId);
+                    var service_ticket = res.data.members.service_ticket;
+                    //url,method,headerMap,data,cdx,resHeaderMap,progress,responseType
+                    xhr2 = await parent.webos.request.proxy("https://pan.quark.cn/account/info?st="+service_ticket,"GET",
+                        {},null,null,
+                        {"set-cookie":"my-set-cookie"}
+                    );
+                    res = JSON.parse(xhr2.responseText);
+                    if(res.success) {
+                        var cookieStr = tmpUtil.getCookieStr(xhr2,"my-set-cookie");
+                        parent.postMessage({type:"cookie",data:cookieStr},"*");
+                    }
+                }
+            }catch (e){
+            }
+        },1000);
+    })();
+</script>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>腾飞WebOS-我的网盘</title>
+    <meta name="referrer" content="never">
+    <link rel="manifest" href="./index.manifest.json"/>
+    <script>"serviceWorker" in navigator&&window.addEventListener("load",(()=>{navigator.serviceWorker.register("./serviceWorker.js").then((e=>console.log("Success: ",e.scope))).catch((e=>console.log("Failure: ",e)))}))</script>
+    <script>
+        (function (){
+            window.pluginName = window.innerWidth > window.innerHeight?"simplePc":"simpleMobile";
+            document.write("<script src=\"./modules/simple/init.js?from=element&plugins="+window.pluginName+"\"></"+"script>");
+        })()
+    </script>
+</head>
+<body style="display:none;touch-action:none;">
+<div data-v-b182c5cc id="app" class="body_main">
+    <el-config-provider :locale="locale">
+      <mobile-app v-if="!isPc" ref="app"></mobile-app>
+      <pc-app v-if="isPc" ref="app"></pc-app>
+    </el-config-provider>
+</div>
+</body>
+<script>
+    (function(){
+        const isPc = window.pluginName == "simplePc";
+        let version = window&&window.utils&&window.utils.config&&window.utils.config.version;
+        if(!version){
+            version = "1.0.0";
+        }
+        window.InitVueComponent = function (app){
+            let zjs;
+            let qz;
+            if(isPc){
+                qz = "pc";
+                zjs = ["pc-app","pc-index","pc-login","pc-confirm","pc-container-select","pc-me","pc-share",
+                "pc-move","pc-move-tree","pc-file-preview","pc-cs","pc-prop"];
+            }else{
+                qz = "mobile";
+                zjs = ["mobile-app","mobile-index","mobile-login","mobile-container","mobile-me",
+                    "mobile-container-cs","mobile-container-move","mobile-confirm","mobile-file-preview",
+                "mobile-file-search","mobile-container-select"];
+            }
+            for(let i=0;i<zjs.length;i++){
+                let zj = zjs[i];
+                app.component(zj, Vue.defineAsyncComponent(function (){
+                    return import('./modules/simple/components/'+qz+"/"+zj+'.js?jsv='+version);
+                }));
+            }
+        };
+        utils.delayAction(function (){
+            return window && window.webos && window.webos.user;
+        },function (){
+            Vue.app({
+                data(){
+                    return {
+                        isPc:true,
+                        locale:ElementPlusLocaleZhCn
+                    }
+                },
+                el:"#app",
+                mounted:function(){
+                    this.isPc = isPc;
+                    if(!isPc){
+                        var fz = (window.innerWidth/37.5).toFixed(2)+"px";
+                        document.querySelector("html").style["font-size"] = fz;
+                    }
+                    document.body.style.display = "";
+                    utils.delayAction(function (){
+                        return window.webos && webos.context && webos.context.get("install") != undefined;
+                    },function (){
+                        if(!webos.context.get("install")){
+                            window.location.href = "install.html";
+                        }
+                    });
+                }
+            });
+        });
+    })()
+</script>
+</html>

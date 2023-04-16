@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小龙云盘登录</title>
+    <script src="../smart-ui/boot/utils.js?from=element"></script>
+</head>
+<body>
+<div id="app">
+    <el-form :model="editData" label-width="120px" style="margin-top:20px;">
+        <el-form-item label="私钥">
+            <el-input type="textarea" v-model="editData.sy" style="width:200px;" :rows="10"></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="reg()" text>创建</el-button>
+            <el-button type="primary" @click="login()">登录</el-button>
+        </el-form-item>
+    </el-form>
+</div>
+</body>
+<script>
+    Vue.app({
+        data(){
+            return {
+                editData:{
+                    sy:""
+                }
+            }
+        },
+        methods:{
+            getAbsoluteUrl:function(module, action){
+                const that = this;
+                if(!that.ajaxHostUrl){
+                    const path = location.origin+location.pathname;
+                    const sz = path.split("/");
+                    sz.length -= 3;
+                    const host = sz.join("/");
+                    that.ajaxHostUrl = host+"/webos/api";
+                }
+                return that.ajaxHostUrl+"?module=" + module + "&action=" + action;
+            },
+            login:function (){
+                const that = this;
+                parent.postMessage({type:"cookie",data:that.editData.sy},"*");
+            },
+            reg:function (){
+                fetch("https://productapi.stariverpan.com/cmsprovider/v1/user/register",{
+                    method:"POST",
+                    body:JSON.stringify({"isTrusted":true,"currentTarget":{"_vei":{}}})
+                }).then(function (res){
+                    return res.json();
+                }).then(function (res){
+                    if(res.code == 200){
+                        parent.postMessage({type:"cookie",data:res.data.token},"*");
+                    }else{
+                        utils.$.errorMsg("新建失败");
+                    }
+                }).catch(function (){
+                    utils.$.errorMsg("新建失败");
+                });
+            }
+        },
+        mounted:function(){
+        }
+    });
+</script>
+</html>

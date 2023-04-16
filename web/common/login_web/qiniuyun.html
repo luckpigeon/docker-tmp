@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>七牛云登录</title>
+    <script src="../smart-ui/boot/utils.js?from=element"></script>
+</head>
+<body>
+<div id="app">
+    <el-form :model="editData" label-width="120px" style="margin-top:20px;">
+        <el-form-item label="AccessKey">
+            <el-input v-model="editData.accessKey" style="width:200px;"></el-input>
+        </el-form-item>
+        <el-form-item label="SecretKey">
+            <el-input v-model="editData.secretKey" style="width:200px;"></el-input>
+        </el-form-item>
+        <el-form-item label="所在区域">
+            <el-select v-model="editData.region" placeholder="请选择区域" style="width:200px;">
+                <el-option v-for="item in regionList" :label="item.name" :value="item.val"></el-option>
+            </el-select>
+        </el-form-item>
+        <el-form-item label="Bucket">
+            <el-input v-model="editData.bucket" style="width:200px;"></el-input>
+        </el-form-item>
+        <el-form-item label="下载域名">
+            <el-input v-model="editData.downHost" style="width:200px;"></el-input>
+        </el-form-item>
+        <el-form-item label="预览限制(KB)">
+            <el-input v-model="editData.limitThumbnail" style="width:200px;"></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="login()">登录</el-button>
+        </el-form-item>
+    </el-form>
+</div>
+</body>
+<script>
+    Vue.app({
+        data(){
+            return {
+                editData:{
+                    accessKey:"",
+                    secretKey:"",
+                    bucket:"",
+                    downHost:"",
+                    limitThumbnail:"1024",
+                    region:""
+                },
+                regionList:[
+                    {val:"z0",name:"华东-浙江"},
+                    {val:"cn-east-2",name:"华东-浙江2"},
+                    {val:"z1",name:"华北-河北"},
+                    {val:"z2",name:"华南-广东"},
+                    {val:"na0",name:"北美-洛杉矶"},
+                    {val:"as0",name:"亚太-新加坡"},
+                    {val:"ap-northeast-1",name:"亚太-首尔"}
+                ]
+            }
+        },
+        methods:{
+            login:function (){
+                const that = this;
+                var flag = false;
+                if(that.editData.downHost.startsWith("http://") || that.editData.downHost.startsWith("https://")){
+                    flag = true;
+                }
+                if(!flag){
+                    parent.webos.message.error("下载域名必须以http://或者https://开头");
+                    return;
+                }
+                for (var key in that.editData){
+                    if(!that.editData[key]){
+                        parent.webos.message.error("参数填写不完整");
+                        return;
+                    }
+                }
+                parent.postMessage({type:"cookie",data:JSON.stringify(that.editData)},"*");
+            },
+        },
+        mounted:function(){
+        }
+    });
+</script>
+</html>

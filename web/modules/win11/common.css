@@ -1,0 +1,661 @@
+.login-box {
+    line-height: 32px;
+    width: 220px;
+}
+.drag-dialog-win .el-dialog{
+    margin:0px;
+    position: fixed;
+    z-index: 2000;
+    border-radius: 6px;
+}
+.drag-dialog-win .el-overlay-dialog{
+    position: initial;
+}
+.drag-dialog-win .el-dialog__header{
+    padding: 1px;
+    background: var(--fakeMica);
+    color: var(--txt-col);
+    margin-right:0px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.drag-dialog-win .el-dialog__body{
+    padding: 0px;
+}
+.drag-dialog-win .win-header{
+    padding:5px;
+}
+.drag-dialog-win .el-dialog__headerbtn{
+    display: none;
+}
+.drag-dialog-win .el-dialog__headerbtn_svg {
+    position: absolute;
+    top: 6px;
+    right: 0;
+    padding: 0;
+    width: 16px;
+    height: 16px;
+    background: 0 0;
+    border: none;
+    outline: 0;
+    cursor: pointer;
+    font-size: var(--el-message-close-size,16px);
+}
+.drag-dialog-win .el-dialog__headerbtn_svg:hover{
+    background-color: #ddd;
+    padding: 1px;
+}
+.dskApp.select {
+    background: #ffffff40;
+}
+.dskApp{
+    height:110px;
+    width:90px;
+}
+.dskApp .appName{
+    overflow: hidden;
+    width: 76px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+.dskApp .rename{
+    width: 116px;
+}
+.dskApp .rename .el-textarea__inner{
+    color:#606266;
+}
+body[data-theme=dark] .dskApp .rename .el-textarea__inner{
+    color:#ffffff;
+    background-color: #606266;
+}
+.drag-dialog-win .snapbox.h-full{
+    width: 48px;
+    height: 28px;
+    position: absolute;
+    top:0px;
+}
+
+.drag-dialog-win .win-right-btn{
+    margin-top:8px;
+}
+.drag-dialog-win .snapbox.h-full:hover{
+    background: #87878733;
+}
+.drag-dialog-win .leftone{
+    top:0px;
+}
+.drag-dialog-win .topone{
+    width: calc(100% - 144px);
+}
+.drag-dialog-win .rightone {
+    height: calc(100% - 30px);
+}
+.more-select-wrap{
+    position: fixed;
+    z-index:500;
+    background: #7ea5d587;
+    border: 1px solid blue;
+    pointer-events: none;
+}
+.drag-dialog-win .el-dialog.is-draggable .el-dialog__header {
+    cursor: default;
+}
+.drag-dialog-win .floatTab{
+    top:29px;
+    height: calc(100% - 29px);
+    border-radius: 0px 0px 6px 6px;
+}
+.drag-dialog-win .dpShad{
+    box-shadow:0 0;
+}
+.edgeBrowser .uicon{
+    margin-top:0px;
+    padding: 5px 2px 5px 2px;
+}
+.edgeBrowser .uicon:hover{
+    background: #87878733;
+    cursor: pointer;
+}
+.edge-star .remove{
+    display: none;
+    margin-left: 5px;
+}
+.edge-star .items-center:hover .remove{
+    display: block;
+}
+.edge-star .items-center {
+    height: 13px;
+}
+.edgeBrowser .star-panel{
+    width: 300px;
+    display: flex;
+    position: absolute;
+    right: 20px;
+    top: 34px;
+    z-index: 10000;
+}
+
+.drag-tips{
+    pointer-events: none;
+    background: #fefefe47;
+    position: fixed;
+    left: 0px;
+    top:0px;
+    width:100vw;
+    height: 100vh;
+    z-index: 9999999;
+}
+.drag-tips span{
+    position: absolute;
+    left: calc(50vw - 80px);
+    top: calc(50vh + 145px);
+    font-size: 20px;
+    font-weight: 900;
+    color: #143360;
+}
+.drag-tips svg{
+    position: absolute;
+    left: calc(50vw - 50px);
+    top: calc(50vh + 25px);
+    width: 100px;
+    height: 100px;
+    fill:#143360;
+}
+.upload-win .select{
+    background: #a9a0a073;
+}
+.el-dialog__title{
+    font-size:14px;
+}
+.window-component > div{
+    position: initial!important;
+}
+.drag-dialog-win .window-component.full .el-dialog__header{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+.drag-dialog-win .window-component.full .floatTab{
+    border-radius: 0px;
+}
+.startMenu{
+    height: min(100vh - 24px,720px);
+    bottom:60px;
+}
+.recApps {
+    width: calc(100% - 64px);
+}
+.webos-file img{
+    pointer-events: none;
+}
+.file-drag-wrap{
+    position: fixed;
+    z-index: 99999;
+    background: #f6faff9e;
+    pointer-events: none;
+    display: none;
+    padding: 10px;
+    width: 100px;
+    height: 100px;
+}
+.file-drag-wrap img{
+    display: flex;
+    width: 80px;
+    height: 80px;
+    left: 10px;
+    top: 10px;
+    position: relative;
+}
+.file-drag-wrap .text{
+    left: 45px;
+    position: absolute;
+    top: 50px;
+    height: 20px;
+    background: blue;
+    color: #fff;
+    text-align: center;
+    display: block;
+    padding: 0px 5px 3px 5px;
+}
+body[data-theme='dark'] .el-card {
+    background-color: initial;
+}
+
+.settingsApp .restWindow .el-card{
+    padding: 15px;
+}
+.settingsApp .restWindow .el-card .el-card__body{
+    height: 100%;
+    padding: 0px;
+}
+.settingsApp .restWindow .el-card * .el-button{
+    min-width: 50px;
+}
+.settingsApp .restWindow .el-card .el-form-item{
+    margin-top: 5px;
+}
+.settingsApp .restWindow .el-card .el-form-item label{
+    padding: 0px 5px;
+}
+.settingsApp .restWindow main .tilesCont{
+    padding: 0 24px 24px;
+}
+.settings-log-component .one-line-text{
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.bind-mibao-form .el-form-item{
+    margin-top: 5px;
+}
+.user-login-form .el-form-item__label{
+    color:#fff;
+}
+#auth-qrcode img{
+    width:180px;
+    height:180px;
+}
+.el-col-1.auto{
+    max-width: 100%;
+}
+.snapcont{
+    display:none;
+}
+.win-layout:hover .snapcont{
+    display: grid;
+}
+.settingsApp{
+    min-width: 100px;
+}
+.file-explorer .appName{
+    color:#000000;
+    text-shadow:initial;
+    height:48px;
+}
+.desktop .appName{
+    height:32px;
+}
+.file-explorer-component .toolbtn:hover{
+    background: #87878733;
+    border-radius: 2px;
+}
+.minimenu{
+    -webkit-animation: fadein .3s ease-in-out;
+    animation: fadein .3s ease-in-out;
+}
+.modal-window .el-dialog__header{
+    height: 20px;
+    padding: 5px;
+}
+.modal-window .el-dialog__headerbtn{
+    display: none;
+}
+html{
+    overflow: hidden;
+}
+::selection{
+    background: #ccc;
+}
+
+.body-modal{
+    height: 100vh;position: fixed;width: 100vw;
+}
+.simple-window .el-dialog__header{
+    position: relative;
+    background: transparent;
+}
+.simple-window .el-dialog__body{
+    margin-top: -32px;
+}
+.simple-window .el-dialog__body > div{
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.simple-window .win-title{
+    display: none;
+}
+.simple-window .common-iframe{
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+.card-select .el-select-dropdown__item{
+    height: 85px;
+    text-align: center;
+    padding-top: 10px;
+}
+.card-select .el-select-dropdown__item .card-select-img{
+    margin: auto;
+    display: block;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+.card-select .el-select-dropdown__item .card-select-text{
+}
+.el-overlay.is-message-box{
+    z-index: 99999 !important;
+}
+.user-login-select{
+    text-align:center;
+    padding: 5px 0px;
+}
+.user-login-select .card-select-text{
+    display:block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.sidePane.dpShad{
+    bottom:60px;
+}
+body[data-theme=dark] .uicon.win-right-btn img {
+    -webkit-filter: invert(1);
+    filter: invert(1);
+}
+body[data-theme=dark] .file-explorer .appName{
+    color: #ffffff;
+}
+body[data-theme=dark] .file-explorer .appName .edit svg{
+    fill: #ffffff;
+}
+.hvlight.active {
+    background: #fffc;
+}
+body[data-theme=dark] .hvlight.active {
+    background: #ffffff1a;
+}
+.calnpane.dpShad{
+    bottom:60px;
+}
+.calnpane .el-calendar-table .el-calendar-day{
+    height:42px;
+    text-align: center;
+}
+.calnpane .el-calendar-day p{
+    height: 14px;
+    font-size: 12px;
+    margin: 0px;
+    padding: 0px;
+}
+.calnpane .date p{
+    height: 16px;
+    font-size: 13px;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+.calnpane .el-date-editor--month{
+    width: 0px;
+    height: 0px;
+    position: fixed;
+    top: 0px;
+}
+.calnpane iframe{
+    border: 0;
+    width: 200px;
+    height: 24px;
+    color-scheme:auto;
+}
+.calnpane .el-calendar__header span.title{
+    cursor: pointer;
+}
+.properties-component .el-tabs--border-card>.el-tabs__header .el-tabs__item{
+    width: auto;
+    text-align: center;
+    line-height: 22px;
+    font-size: 12px;
+}
+.properties-component .el-tabs--border-card>.el-tabs__header .el-tabs__item.is-active{
+    color: #111;
+}
+.properties-component .el-tabs--border-card>.el-tabs__header .el-tabs__item:hover{
+    color: #222;
+}
+.properties-component .el-tabs__nav{
+    height: 22px;
+}
+.properties-component .prop-btns{
+    margin-top: 10px;
+    margin-left: 90px;
+}
+.properties-component .prop-btns button{
+    width: 88px;
+    height: 30px;
+    font-size: 12px;
+}
+.properties-component .el-card__body{
+    padding: 10px;
+}
+.properties-component .el-button:focus, .el-button:hover {
+  color: #000;
+  border-color:#0067c0;
+  background-color: #409eff30;
+}
+html.dark .properties-component .el-tabs--border-card>.el-tabs__header .el-tabs__item.is-active{
+    color: #ddd;
+}
+.window-component .snapbox.disabled{
+    pointer-events: none;
+    background-color: #ccc;
+    filter: opacity(0.5);
+}
+body[data-theme=dark] .window-component .snapbox.disabled{
+    background-color: #504c4c;
+}
+.upload-task-component .spread-btn{
+    height:14px;
+    width:14px;
+    position:relative;
+    top: 3px;
+}
+body[data-theme=dark] .upload-task-component .spread-btn{
+    fill:#fff;
+}
+body[data-theme=dark] .upload-task-component .el-dialog__headerbtn_svg{
+    fill:#fff;
+}
+.prop-link{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+.file-select-component .msribbon,.file-select-component .sec3{
+    display: none;
+}
+.desktop{
+    height:100vh;
+}
+body{
+    width: 100% !important;
+}
+.login-form .login-input{
+    width:224px;
+}
+.login-form .login-input .el-input__wrapper,
+.login-form .el-radio-group .el-radio-button__inner{
+    border-radius:0px;
+}
+.login-form .el-radio-group .el-radio-button:first-child .el-radio-button__inner{
+    width: 76px;
+}
+.login-third{
+    margin-top:15px;
+    text-align: center;
+}
+.login-third img{
+    cursor: pointer;
+    margin-left:5px;
+    height: 24px;
+    width: auto;
+}
+.fadeinScreen{
+    top: calc(50vh - 275px);
+}
+.path-folder-select .el-col{
+    text-align: center;
+
+}
+.path-folder-select{
+    height:300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+.path-folder-select img{
+    width:64px;
+    height:64px;
+}
+.path-folder-select .path-name{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0px 5px;
+}
+.user-avatar{
+    width:90px;
+    height:90px;
+    object-fit: cover;
+}
+.user-avatar.s60{
+    width:60px;
+    height:60px;
+}
+.user-avatar.s40{
+    width:40px;
+    height:40px;
+}
+.user-avatar.s26{
+    width:26px;
+    height:26px;
+}
+.user-avatar.s200{
+    width:200px;
+    height:200px;
+}
+.settingsApp .restWindow main .tilesCont .tile.no-arrow:after{
+    display: none;
+}
+.webdav .copy-tag{
+    cursor: pointer;
+    display: inline-block;
+    line-height: 24px;
+    margin-left: 10px;
+    padding: 0px 5px;
+}
+.webdav .tile .fa{
+    margin: 0 21px 0 17.5px;
+}
+.wnstore .items-center .ins-tag-btn{
+    margin-left:5px;
+    margin-bottom:5px;
+    cursor:pointer;
+}
+.wnstore .iframe-img{
+    width:100px;
+    height:100px;
+    object-fit: cover;
+}
+.settingsApp .restWindow main .netTop.system div:first-child{
+    gap: 0px;
+}
+.settingsApp .restWindow main .tilesCont .tile .tile_desc.size-big{
+   font-size:15px;
+}
+.settingsApp .restWindow .el-radio-button__inner{
+    padding:3px;
+}
+.settingsApp .restWindow label.el-radio-button{
+    padding:0px !important;
+}
+.pay-qrcode-div{
+    text-align: center;
+}
+.pay-qrcode-div img{
+    margin-left: auto;
+    margin-right: auto;
+}
+.share-readme{
+    width: 100%;
+    height: 100%;
+    margin-top: 108px;
+    z-index:9999;
+    background:#ffffff;
+}
+body[data-theme='dark'] .share-readme{
+    background:#191919;
+}
+.taskbar .widPaneCont{
+    top: calc(-100vh + 60px);
+    bottom: 60px;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+}
+.taskbar .widPaneCont.top-share{
+    top: -444px;
+}
+.widPaneCont .WidPane .widgetCont{
+    width:98%;
+}
+.widPaneCont .newsCont{
+    margin-top:-6px;
+}
+.widPaneCont .articleCont{
+    height:200px;
+    width:306px;
+    padding:0px;
+}
+.widPaneCont .articleCont img{
+    width:100%;
+    height:100%;
+}
+.widPaneCont .articleCont .tpNews{
+    padding:0px 12px;
+}
+.widPaneCont{
+    width:650px;
+}
+.dskApp{
+    font-size: 12px;
+}
+.sec3 .share-info{
+    margin-left: 25px;
+}
+.share-edit .el-overlay{
+    z-index:500 !important;
+}
+.el-dropdown-menu .menuopt .spcont{
+    margin-top: 5px;
+}
+.toolbtn{
+    color: var(--txt-col);
+}
+.toolbtn.disabled{
+    color: var(--el-text-color-disabled);
+}
+.toolbtn.disabled img{
+    filter: opacity(0.5);
+}
+.settingsApp .restWindow main .tilesCont .tile{
+    padding: 7px 10px 7px 0;
+}
+.webos-file-panel .file-link{
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 0px;
+}
+.el-dialog__title{
+    padding-left: 5px;
+}
+.desktop .desktopCont {
+    height: calc(100% - 30px);
+}
+.desktop-component .file-tips{
+    position: fixed;
+    z-index: 2500;
+    background: var(--fakeMica);
+    padding: 10px;
+    border-radius: 4px;
+    max-width:350px;
+    filter: opacity(0.9);
+}

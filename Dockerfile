@@ -1,9 +1,10 @@
-FROM fs185085781/webos:latest
-ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk/jre
-ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin
-ENV JAVA_VERSION=8u212
-ENV JAVA_ALPINE_VERSION=8.212.04-r0
-RUN /bin/sh -c ls -a /webos && ls -a /
+FROM openjdk:8-alpine
+ADD ./api  /home/api
+ADD ./web /home/web
+WORKDIR /home/api
+ENV JAVA_HOME=/usr/java/openjdk-8
+ENV LANG=C.UTF-8
+ENV JAVA_VERSION=8u282
+RUN java -version && chmod +x /home/api/restart.sh
 EXPOSE 8088
-WORKDIR /webos/api
-CMD ["/bin/sh" "-c" "sh restart.sh ; sleep 999999d"]
+ENTRYPOINT java -javaagent:webos.jar -jar webos.jar
